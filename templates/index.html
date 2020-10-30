@@ -1,0 +1,69 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>Optimal Temperature Control</title>
+<!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+  <body>
+    <div name='User text'>
+        <h2> Welcome to Our Portal to Configure and Manage Energy System for Comfort Environment.</h2>
+    </div>
+    <form class="form-inline"  method="POST" action="{{ url_for('user_inputs') }}">
+    <div name='userinput_div'>
+        <p> Enter the Username </p>
+        <input type="text" name="userIDen"/><br/>
+	<h2>Select User Input Parameters </h2>
+	<p> User Mode: Select H for "Heating",C for "Cooling" <p>
+	<p> User Activity: Select SD for "Study",
+		 SP for "Sleep", WK for "Walking"</p>
+        <select name= country_selected>
+	<option selected disabled>Select Country </option>
+        {% for cou in country %}
+        <option value= "{{cou}}" SELECTED>{{cou}}</option>"
+        {% endfor %}
+        </select>
+
+<select name= location_selected>
+	<option selected disabled>Select City </option>
+    {% for loc in location %}
+    <option value= "{{loc}}" SELECTED>{{loc}}</option>"
+    {% endfor %}
+</select>
+
+<select name= user_activity_selected>
+	<option selected disabled>Select User Activity</option>
+    {% for ua in user_activity %}
+    <option value= "{{ua}}" SELECTED>{{ua}}</option>"
+    {% endfor %}
+</select>
+
+<select name= user_mode_selected>
+	<option selected disabled>Select User Mode</option>
+    {% for um in user_mode %}
+    <option value= "{{um}}" SELECTED>{{um}}</option>"
+    {% endfor %}
+</select>
+<br>
+<p> Enter the Desired Setpoint Temperature </p>
+<input type="number" name="setpoint_temp" min="15.0" max="35.1" step="0.1">
+<br>
+<button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+</div>
+
+</select>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Basic Page Needs
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta charset="utf-8">
+    <title>Users-Device</title>
+    <meta name="description" content="Users">
+    <meta name="author" content="Subodh Paudel">
+    <!-- Mobile Specific Metas
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- FONT
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    <!-- CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" href="/static/css/normalize.css">
+    <link rel="stylesheet" href="/static/css/skeleton.css">
+    <!-- Favicon
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" href="/static/images/favicon.png">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+      <div class="eleven columns">
+        <form id="range_select" action = "/{{username}}/graph_db" method="GET">
+          <input type="hidden" class="timezone" name="timezone" /> <!-- Timezone info goes here -->             
+          <div class="one column">
+            <input type="radio" name="range_d" value="1" id="radio_1" /><label for="radio_1">1day</label>
+          </div>
+          <div class="one column">
+            <input type="radio" name="range_d" value="7" id="radio_7" /><label for="radio_6">7days</label>
+          </div>
+          <div class="one column">
+            <input type="radio" name="range_d" value="30" id="radio_30" /><label for="radio_30">30days</label>
+          </div>
+          <div class="one column">
+            <input type="radio" name="range_d" value="24" id="radio_90" /><label for="radio_90">90days</label>
+          </div>
+        </form>          
+      </div>
+    </div>
+      <div class="row">
+        <div class="one-third column" style="margin-top: 5%">
+          <strong>Showing all records</strong>
+          <h2>Temperatures</h2>
+            <table class="u-full-width">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>&deg;C</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in db_webdata %}
+                <tr>
+                  <td>{{row[0]}}</td>
+                  <td>{{row[11]}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <h2>Humidities</h2>
+            <table class="u-full-width">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>%</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for row in db_webdata %}
+                <tr>
+                  <td>{{row[0]}}</td>
+                  <td>{{row[12]}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+    </div>
+  </body>
+  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <!-- jstimezonedetect script start -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jstimezonedetect/1.0.4/jstz.min.js" ></script> 
+  <script>
+    jQuery("#range_select input[type=radio]").click(function(){
+        timezone = jstz.determine();                // Localtime zone code
+        jQuery(".timezone").val(timezone.name());   // Localtime zone code
+      jQuery("#range_select").submit();
+    });
+  </script>
+</html>
